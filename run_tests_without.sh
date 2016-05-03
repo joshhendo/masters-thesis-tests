@@ -2,7 +2,7 @@
 
 # TEST WITHOUT LOCK PROVIDER
 
-echo "status,iterations,time\n" > results_without.txt
+echo "status,iterations,time" > results_without.txt
 
 sh ./run_activemq_without.sh
 sleep 15s
@@ -13,7 +13,7 @@ for i in "${arr[@]}"
 do
    exec python ./testing/send.py $i &
 	RESULT="$(python ./testing/read.py $i)"
-	echo "lock,$i,$RESULT" >> results.txt
+	echo "lock,$i,$RESULT" >> results_without.txt
 done
 
 ./apache-activemq-5.13.2/bin/activemq stop

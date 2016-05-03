@@ -2,7 +2,7 @@
 
 # TEST WITH LOCk PROVIDER
 
-echo "status,iterations,time\n" > results_with.txt
+echo "status,iterations,time" > results_with.txt
 
 sh ./run_activemq.sh
 sleep 15s
