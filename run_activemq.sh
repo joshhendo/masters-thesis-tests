@@ -10,7 +10,7 @@ fi
 
 # Compile
 cd ./activemq-isolation-plugin 
-/opt/apache-maven-3.3.9/bin/mvn clean install
+mvn clean install
 
 cd ..
 
