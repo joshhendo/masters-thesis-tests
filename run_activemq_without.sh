@@ -9,4 +9,4 @@ if [ ! -d "apache-activemq-5.13.2" ]; then
 fi 
 
 # Run Active MQ
-./apache-activemq-5.13.2/bin/activemq console
+./apache-activemq-5.13.2/bin/activemq start
