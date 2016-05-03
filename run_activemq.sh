@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Exit script if it encounters an error (e.g. during compilation)
 set -e
 
@@ -10,15 +12,16 @@ fi
 cd ./activemq-isolation-plugin 
 /opt/apache-maven-3.3.9/bin/mvn clean install
 
+cd ..
+
 # Check that apache-activemq-5.13.2 exists
 if [ ! -d "apache-activemq-5.13.2" ]; then
 	curl "http://apache.mirror.serversaustralia.com.au/activemq/5.13.2/apache-activemq-5.13.2-bin.tar.gz" -o apache-activemq-5.13.2-bin.tar.gz
-	tar -zxvf apache-activemq-5.13.2.tar.gz
+	tar -zxvf apache-activemq-5.13.2-bin.tar.gz
 	rm apache-activemq-5.13.2.tar.gz
 fi 
 
 # Download libraries
-cd ..
 cd ./apache-activemq-5.13.2/lib
 
 if [ ! -f commons-lang3-3.4.jar ]; then
@@ -38,4 +41,4 @@ cd ./../..
 cp ./activemq-isolation-plugin/target/activemq-isolation.jar ./apache-activemq-5.13.2/lib/
 
 # Run Active MQ
-./apache-activemq-5.13.2/bin/activemq console xbean:file:./activemq-isolation-plugin/src/main/resources/org/apache/activemq/isolation/activemq-isolation.xml
+./apache-activemq-5.13.2/bin/activemq start xbean:file:./activemq-isolation-plugin/src/main/resources/org/apache/activemq/isolation/activemq-isolation.xml

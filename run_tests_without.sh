@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# TEST WITH LOCk PROVIDER
+# TEST WITHOUT LOCK PROVIDER
 
-echo "status,iterations,time\n" > results_with.txt
+echo "status,iterations,time\n" > results_without.txt
 
-sh ./run_activemq.sh
+sh ./run_activemq_without.sh
 sleep 15s
 
 # Declare arrays of iterations

@@ -12,8 +12,6 @@ if (len(sys.argv) < 2):
 # How many messages are we expecting to come in?
 expected = int(sys.argv[1])
 
-print("Expecting: " + str(expected))
-
 count = 0
 
 start = None
@@ -24,12 +22,9 @@ stomp.connect()
 
 stomp.subscribe(queue_name, "client")
 
-print("starting")
-
 while (count < expected):
 	try: 
 		frame = stomp.get()
-		#print("got a message... count is at " + str(count))
 		if start is None:
 			start = timer()
 		count = count + 1
@@ -42,8 +37,7 @@ end = timer()
 
 result = (end - start)
 
-print("ending")
-print("result: " + str(result) + "s")
+print(str(result))
 
 stomp.unsubscribe(queue_name)
 stomp.disconnect()
