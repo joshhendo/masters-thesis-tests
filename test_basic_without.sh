@@ -4,7 +4,7 @@
 
 echo "status,iterations,time" > results_without.txt
 
-sh ./run_activemq_without.sh
+sh ./helper_scripts/run_activemq_without.sh
 sleep 15s
 
 # Declare arrays of iterations

@@ -1,3 +1,7 @@
+#!/bin/bash
+
+cd ..
+
 # Exit script if it encounters an error (e.g. during compilation)
 set -e
 
