@@ -9,4 +9,4 @@ def run_command(cmd):
 
 for x in range(0,5):
 	run_command("python test_basic_with.py");
-	run_command("python test_basic_withouy.py");
+	run_command("python test_basic_without.py");
