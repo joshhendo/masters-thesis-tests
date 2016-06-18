@@ -6,3 +6,4 @@ do
 	python test_basic_without.py
 done
 
+python process_results.py

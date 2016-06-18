@@ -18,8 +18,7 @@ def get_timestamp():
 def run_command(cmd):
 	cmd_args = shlex.split(cmd)
 	print(cmd_args)
-	subprocess.run(cmd_args)
-	# return subprocess.Popen(cmd_args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+	subprocess.call(cmd_args)
 
 def run_command_back(cmd):
 	return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -32,8 +31,8 @@ def run(iterations, results_name, activemq_script):
 	print("Starting Active MQ")
 	run_command("sh ./helper_scripts/" + activemq_script)
 
-	print("Waiting 15 seconds...")
-	time.sleep(15)
+	print("Waiting 3 seconds...")
+	time.sleep(3)
 
 	print("Starting tests");
 	filename = "./results/" + results_name + "_" + timestamp
@@ -62,3 +61,6 @@ def run(iterations, results_name, activemq_script):
 	# Kill dead active MQ
 	print("Killing Active MQ...")
 	activemq_process_kill = run_command('sh ./apache-activemq-5.13.2/bin/activemq stop')
+
+	print("Waiting 3 seconds...")
+	time.sleep(3)
