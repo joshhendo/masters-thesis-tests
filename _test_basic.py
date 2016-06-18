@@ -23,6 +23,17 @@ def run_command(cmd):
 def run_command_back(cmd):
 	return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
+def get_memory_usage(pid):
+	command = run_command('ps -p ' + str(pid) + '-o %mem | head -2 | tail -1')
+	result = command.communicate()[0].decode('utf-8').rstrip() 
+	return result
+
+def get_activemq_pid():
+	result = run_command_back("sh ./helper_scripts/activemq_pid.sh")
+	result.wait()
+	result = pid.communicate()[0].decode('utf-8').rstrip()
+	return result
+
 def run(iterations, results_name, activemq_script):
 	# Define variables to be used later on
 	timestamp = get_timestamp()
