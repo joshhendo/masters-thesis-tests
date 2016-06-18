@@ -25,3 +25,8 @@ python test_basic_with.py
 ```
 
 This will start Active MQ, start the tests, write the results to the results directory, and kill Active MQ.
+
+For processing of results, you will need `xlsxwriter`. This can be installed with
+```
+python -m pip install xlsxwriter
+```
