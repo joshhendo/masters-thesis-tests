@@ -8,6 +8,7 @@ import sys
 import time
 import datetime
 import subprocess
+import shlex
 
 def get_timestamp():
 	ts = time.time()
@@ -15,6 +16,12 @@ def get_timestamp():
 	return st
 
 def run_command(cmd):
+	cmd_args = shlex.split(cmd)
+	print(cmd_args)
+	subprocess.run(cmd_args)
+	# return subprocess.Popen(cmd_args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+def run_command_back(cmd):
 	return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 def run(iterations, results_name, activemq_script):
@@ -23,7 +30,7 @@ def run(iterations, results_name, activemq_script):
 
 	# Start Active MQ
 	print("Starting Active MQ")
-	activemq_process = run_command("sh ./helper_scripts/" + activemq_script)
+	run_command("sh ./helper_scripts/" + activemq_script)
 
 	print("Waiting 15 seconds...")
 	time.sleep(15)
@@ -35,8 +42,11 @@ def run(iterations, results_name, activemq_script):
 
 	for i in iterations:
 		print("Running: " + str(i))
-		runner_receiver = run_command("python2 ./testing/read.py " + str(i))
-		runner_sender = run_command("python2 ./testing/send.py " + str(i))
+		print("Starting Read")
+		runner_receiver = run_command_back("python2 ./testing/read.py " + str(i))
+		print("Starting Send")
+		runner_sender = run_command_back("python2 ./testing/send.py " + str(i))
+		print("Waiting for Send to Finish")
 		runner_sender.wait()
 
 		# Get the stdout from the runner, decode it and strip the newline
@@ -51,6 +61,4 @@ def run(iterations, results_name, activemq_script):
 
 	# Kill dead active MQ
 	print("Killing Active MQ...")
-	activemq_process.kill();
-	activemq_process_kill = run_command('./apache-activemq-5.13.2/bin/activemq stop')
-	activemq_process_kill.wait();
+	activemq_process_kill = run_command('sh ./apache-activemq-5.13.2/bin/activemq stop')
