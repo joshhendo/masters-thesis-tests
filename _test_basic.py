@@ -31,8 +31,8 @@ def run(iterations, results_name, activemq_script):
 	print("Starting Active MQ")
 	run_command("sh ./helper_scripts/" + activemq_script)
 
-	print("Waiting 3 seconds...")
-	time.sleep(3)
+	print("Waiting 8 seconds...")
+	time.sleep(8)
 
 	print("Starting tests");
 	filename = "./results/" + results_name + "_" + timestamp
